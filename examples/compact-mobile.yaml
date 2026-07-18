@@ -1,0 +1,19 @@
+# Compact mobile — condensed layout tuned for phone-sized dashboards.
+# Trims hourly range, drops daily forecast, keeps only the essentials.
+type: custom:bubble-card
+card_type: button
+button_type: state
+entity: weather.home
+name: Weather
+modules:
+  - bubble-weather-pro
+weather_pro:
+  show_hourly: true
+  hourly_hours: 6
+  show_daily: false
+  show_wind: false
+  show_humidity: true
+  show_rain_probability: true
+  first_last_light: false
+  animated_icons: true
+  dynamic_background: true

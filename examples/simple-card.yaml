@@ -1,0 +1,17 @@
+# Simple card — a standard single-entity weather card with a few common
+# overrides, suitable as a dashboard tile that opens the full pop-up.
+type: custom:bubble-card
+card_type: pop-up
+modules:
+  - bubble-weather-pro
+entity: weather.home
+name: Weather
+icon: mdi:weather-partly-cloudy
+weather_pro:
+  show_hourly: true
+  hourly_hours: 8
+  show_daily: true
+  daily_days: 5
+  show_wind: true
+  show_humidity: true
+  show_rain_probability: true

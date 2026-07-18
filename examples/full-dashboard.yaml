@@ -1,0 +1,47 @@
+# Full dashboard — Bubble Weather Pro embedded as the hero card in a
+# complete example dashboard view, alongside other Bubble Card cards.
+title: Home
+views:
+  - title: Home
+    path: home
+    type: masonry
+    cards:
+      - type: custom:bubble-card
+        card_type: pop-up
+        modules:
+          - bubble-weather-pro
+        entity: weather.home
+        name: Weather
+        weather_pro:
+          show_hourly: true
+          hourly_hours: 12
+          show_daily: true
+          daily_days: 7
+          show_wind: true
+          show_humidity: true
+          show_rain_probability: true
+          first_last_light: true
+          animated_icons: true
+          dynamic_background: true
+
+      - type: custom:bubble-card
+        card_type: button
+        button_type: switch
+        entity: light.living_room
+        name: Living Room
+
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: climate.thermostat
+        name: Thermostat
+
+      - type: custom:bubble-card
+        card_type: separator
+        name: Cameras
+
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: camera.front_door
+        name: Front Door

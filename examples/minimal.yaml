@@ -1,0 +1,7 @@
+# Minimal example — smallest possible working configuration.
+# Uses every default: hourly + daily forecast, animated icons, dynamic background.
+type: custom:bubble-card
+card_type: pop-up
+modules:
+  - bubble-weather-pro
+entity: weather.home
