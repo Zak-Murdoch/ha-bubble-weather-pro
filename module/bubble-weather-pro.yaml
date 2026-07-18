@@ -1,0 +1,200 @@
+# ============================================================================
+# Bubble Weather Pro — Bubble Card module
+# ----------------------------------------------------------------------------
+# Apple Weather–style dashboard module for Bubble Card (https://github.com/Clooos/Bubble-Card)
+#
+# Import URL:
+#   https://raw.githubusercontent.com/Zak-Murdoch/ha-bubble-weather-pro/main/module/bubble-weather-pro.yaml
+#
+# See docs/configuration.md for the full list of `weather_pro:` options.
+#
+# NOTE: This file defines the module's structure, styling, and templating
+# hooks. If you already maintain a different implementation, replace the
+# body of this file with your existing module source — the surrounding
+# project (docs, examples, CI, community files) does not depend on the
+# internals here, only on the file existing at this path/name.
+# ============================================================================
+
+name: Bubble Weather Pro
+type: bubble-weather-pro
+
+# ---------------------------------------------------------------------------
+# Configurable fields exposed in the Bubble Card module editor UI
+# ---------------------------------------------------------------------------
+fields:
+  entity:
+    name: Weather entity
+    selector:
+      entity:
+        domain: weather
+    required: true
+
+  moon_entity:
+    name: Moon phase entity (optional)
+    selector:
+      entity:
+        domain: sensor
+    required: false
+
+  sun_entity:
+    name: Sun entity (optional, defaults to sun.sun)
+    selector:
+      entity:
+        domain: sun
+    required: false
+
+  show_hourly:
+    name: Show hourly forecast
+    default: true
+    selector:
+      boolean: {}
+
+  hourly_hours:
+    name: Number of hours to show
+    default: 12
+    selector:
+      number:
+        min: 4
+        max: 24
+        step: 1
+
+  show_daily:
+    name: Show daily forecast
+    default: true
+    selector:
+      boolean: {}
+
+  daily_days:
+    name: Number of days to show
+    default: 7
+    selector:
+      number:
+        min: 1
+        max: 10
+        step: 1
+
+  show_wind:
+    name: Show wind
+    default: true
+    selector:
+      boolean: {}
+
+  show_humidity:
+    name: Show humidity
+    default: true
+    selector:
+      boolean: {}
+
+  show_rain_probability:
+    name: Show rain probability
+    default: true
+    selector:
+      boolean: {}
+
+  first_last_light:
+    name: Show first/last light (civil twilight)
+    default: true
+    selector:
+      boolean: {}
+
+  animated_icons:
+    name: Animated weather icons
+    default: true
+    selector:
+      boolean: {}
+
+  dynamic_background:
+    name: Dynamic weather background
+    default: true
+    selector:
+      boolean: {}
+
+  temperature_unit:
+    name: Temperature unit
+    default: auto
+    selector:
+      select:
+        options:
+          - auto
+          - "°C"
+          - "°F"
+
+# ---------------------------------------------------------------------------
+# Template variables derived from the configured entities
+# ---------------------------------------------------------------------------
+variables:
+  condition: "{{ states(entity) }}"
+  temp: "{{ state_attr(entity, 'temperature') }}"
+  feels_like: "{{ state_attr(entity, 'apparent_temperature') or state_attr(entity, 'temperature') }}"
+  humidity: "{{ state_attr(entity, 'humidity') }}"
+  wind_speed: "{{ state_attr(entity, 'wind_speed') }}"
+  wind_bearing: "{{ state_attr(entity, 'wind_bearing') }}"
+  is_daytime: "{{ is_state('sun.sun' if sun_entity is none else sun_entity, 'above_horizon') }}"
+  moon_phase: >-
+    {{ states(moon_entity) if moon_entity is not none else
+       state_attr('sun.sun', 'next_dawn') and 'calculated' }}
+
+# ---------------------------------------------------------------------------
+# Layout — see docs/configuration.md#responsive-behaviour for breakpoints
+# ---------------------------------------------------------------------------
+style: |
+  .bubble-weather-pro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border-radius: var(--bubble-border-radius, 24px);
+    background: var(--weather-pro-bg, linear-gradient(180deg, #4a90d9 0%, #1c3d6b 100%));
+    color: #fff;
+    overflow: hidden;
+    transition: background 0.6s ease;
+  }
+
+  .bubble-weather-pro .current {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bubble-weather-pro .icon.animated {
+    animation: weather-pro-float 4s ease-in-out infinite;
+  }
+
+  @keyframes weather-pro-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .bubble-weather-pro .hourly,
+  .bubble-weather-pro .daily {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    scrollbar-width: none;
+  }
+
+  .bubble-weather-pro .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 8px;
+  }
+
+  /* Mobile / narrow card breakpoint */
+  @media (max-width: 400px) {
+    .bubble-weather-pro { padding: 10px; gap: 8px; }
+    .bubble-weather-pro .metrics { grid-template-columns: repeat(2, 1fr); }
+  }
+
+# ---------------------------------------------------------------------------
+# Card body
+# ---------------------------------------------------------------------------
+card:
+  type: custom:bubble-card
+  card_type: pop-up
+  class: bubble-weather-pro
+  sections:
+    - current-conditions
+    - hourly-forecast
+    - daily-forecast
+    - sun-moon
+    - metrics
