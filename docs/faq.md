@@ -6,7 +6,9 @@ It's a **module** for [Bubble Card](https://github.com/Clooos/Bubble-Card) — B
 
 ### Is this available in HACS?
 
-Not as a HACS-managed integration/repository at this time — it's installed via Bubble Card's built-in "Import module" feature (a single URL), which requires no HACS entry of its own. Adding it as a HACS custom repository is on the [roadmap](../README.md#-roadmap) if there's demand — vote or comment on the relevant issue.
+No, and this is by design. Bubble Weather Pro is a **Bubble Card YAML module** — not a frontend JavaScript resource, not a custom integration, and not a theme. HACS doesn't have a category that fits this type of project. The correct install method is Bubble Card's own built-in "Import module" URL, which is a single copy-paste step with no HACS entry required.
+
+If you want to install Bubble Card itself, that's available in HACS under Frontend.
 
 ### Does it work with any weather integration?
 
