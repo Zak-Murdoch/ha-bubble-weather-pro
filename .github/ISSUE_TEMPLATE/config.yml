@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question (Discussions)
+    url: https://github.com/Zak-Murdoch/ha-bubble-weather-pro/discussions
+    about: Questions, help requests, and general discussion — not bugs or feature requests.
+  - name: Home Assistant Community Forum
+    url: https://community.home-assistant.io/
+    about: Broader Home Assistant questions.
+  - name: Bubble Card issues
+    url: https://github.com/Clooos/Bubble-Card/issues
+    about: Issues with Bubble Card itself (not this module).
