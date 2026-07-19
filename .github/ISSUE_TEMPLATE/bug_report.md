@@ -49,7 +49,7 @@ If applicable, add screenshots or a short screen recording.
 Open your browser's developer tools (F12 → Console) and paste any errors that mention
 `bubble-weather-pro` or `bubble-card`:
 
-```
+```text
 # Paste console errors here
 ```
 

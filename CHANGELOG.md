@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
+
 - Radar overlay
 - UV index
 - Air quality index
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-07-19
 
 ### Added
+
 - Initial public release of Bubble Weather Pro as a standalone Bubble Card module
 - Animated, condition-aware weather icons
 - Dynamic weather backgrounds tied to current condition and time of day

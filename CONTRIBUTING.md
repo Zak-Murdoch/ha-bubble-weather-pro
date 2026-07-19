@@ -37,7 +37,7 @@ Thanks for considering a contribution — whether it's a bug report, a new featu
 
 We use short, conventional-style commit messages:
 
-```
+```text
 docs: clarify moon integration fallback behaviour
 fix: correct wind direction rounding
 feat: add compact mobile layout variant

@@ -24,7 +24,7 @@ Bubble Card supports importing modules directly from a URL:
 2. In the visual editor, open **Manage modules → Import module**.
 3. Paste:
 
-   ```
+   ```text
    https://raw.githubusercontent.com/Zak-Murdoch/ha-bubble-weather-pro/main/module/bubble-weather-pro.yaml
    ```
 
